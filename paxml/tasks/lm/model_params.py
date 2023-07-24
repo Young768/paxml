@@ -306,8 +306,9 @@ class TransformerBertPmapAdam(base_experiment.BaseExperiment):
     )
     transformer_layer_p.tr_fflayer_tpl.use_gated_activation = (
         self.USE_GATED_ACTIVATION)
-
+    print("log from model_params.py")
     if self.USE_REPEATED_LAYER:
+      print("log from model_params.py TransformerBertPmapAdam yes")
       model_p.lm_tpl.stacked_transformer_tpl = pax_fiddle.Config(
           layers.StackedTransformerRepeated
       )
@@ -317,6 +318,7 @@ class TransformerBertPmapAdam(base_experiment.BaseExperiment):
       model_p.lm_tpl.stacked_transformer_tpl.checkpoint_policy = (
           self.CHECKPOINT_POLICY)
     else:
+      print("log from model_params.py TransformerBertPmapAdam no")
       model_p.lm_tpl.stacked_transformer_tpl = stacked_transformer_tpl
 
     softmax_init = WeightInit.Gaussian(1.0 / math.sqrt(self.MODEL_DIMS))
@@ -393,8 +395,9 @@ class TransformerBertSpmdAdafactor(base_experiment.BaseExperiment):
     )
     transformer_layer_p.tr_fflayer_tpl.use_gated_activation = (
         self.USE_GATED_ACTIVATION)
-
+    print("log from model_params.py")
     if self.USE_REPEATED_LAYER:
+      print("log from model_params.py TransformerBertSpmdAdafactor yes")
       model_p.lm_tpl.stacked_transformer_tpl = pax_fiddle.Config(
           layers.StackedTransformerRepeated
       )
@@ -404,6 +407,7 @@ class TransformerBertSpmdAdafactor(base_experiment.BaseExperiment):
       model_p.lm_tpl.stacked_transformer_tpl.checkpoint_policy = (
           self.CHECKPOINT_POLICY)
     else:
+      print("log from model_params.py TransformerBertSpmdAdafactor no")
       model_p.lm_tpl.stacked_transformer_tpl = stacked_transformer_tpl
 
     softmax_init = WeightInit.Gaussian(1.0 / math.sqrt(self.MODEL_DIMS))
@@ -488,8 +492,9 @@ class TransformerLmPmapAdam(base_experiment.BaseExperiment):
       atten_xl_p.copy_fields_from(transformer_layer_p.tr_atten_tpl)
       atten_xl_p.set(rel_pos_emb_dim=self.REL_POS_EMB_DIM)
       transformer_layer_p.tr_atten_tpl = atten_xl_p
-
+    print("log from model_params.py")
     if self.USE_REPEATED_LAYER:
+      print("log from model_params.py TransformerLmPmapAdam yes")
       model_p.lm_tpl.stacked_transformer_tpl = pax_fiddle.Config(
           layers.StackedTransformerRepeated
       )
@@ -497,6 +502,7 @@ class TransformerLmPmapAdam(base_experiment.BaseExperiment):
       model_p.lm_tpl.stacked_transformer_tpl.block = (stacked_transformer_tpl)
       model_p.lm_tpl.stacked_transformer_tpl.x_times = self.NUM_LAYERS
     else:
+      print("log from model_params.py TransformerLmPmapAdam no")
       model_p.lm_tpl.stacked_transformer_tpl = stacked_transformer_tpl
 
     softmax_init = WeightInit.Gaussian(1.0 / math.sqrt(self.MODEL_DIMS))
@@ -637,6 +643,7 @@ class TransformerLmSpmdAdafactor(base_experiment.BaseExperiment):
       transformer_layer_p.tr_atten_tpl.use_rotary_position_emb = True
 
     if self.USE_REPEATED_LAYER:
+      print("log from model_params.py TransformerLmSpmdAdafactor yes")
       model_p.lm_tpl.stacked_transformer_tpl = pax_fiddle.Config(
           layers.StackedTransformerRepeated
       )
@@ -646,6 +653,7 @@ class TransformerLmSpmdAdafactor(base_experiment.BaseExperiment):
       model_p.lm_tpl.stacked_transformer_tpl.checkpoint_policy = (
           self.CHECKPOINT_POLICY)
     else:
+      print("log from model_params.py TransformerLmSpmdAdafactor no")
       model_p.lm_tpl.stacked_transformer_tpl = stacked_transformer_tpl
 
     # Enable bf16.
@@ -823,6 +831,7 @@ class TransformerLmSpmdPipelineAdafactor(TransformerLmSpmdAdafactor):
       transformer_layer_p.tr_atten_tpl.use_rotary_position_emb = True
 
     if self.USE_REPEATED_LAYER:
+      print("log from model_params.py TransformerLmSpmdPipelineAdafactor#### yes")
       stacked_transformer_tpl.num_layers = 1
       stacked_transformer_tpl = pax_fiddle.Config(
           layers.StackedTransformerRepeated, block=stacked_transformer_tpl

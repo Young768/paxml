@@ -368,11 +368,12 @@ class TransformerLmSpmdAdam(model_params.TransformerLmSpmdAdafactor):
     task_p = super().task()
     model_p = task_p.model
     model_p.lm_tpl.packed_input = self.PACKED_INPUT  # pytype: disable=attribute-error  # enable-nested-classes
-
+    print("log from c4.py")
     stacked_p = model_p.lm_tpl.stacked_transformer_tpl  # pytype: disable=attribute-error  # enable-nested-classes
     if fdl.get_callable(stacked_p) == transformers.PipelinedTransformer:
       stacked_p = stacked_p.pipeline_stage
     if self.USE_REPEATED_LAYER:
+      print("log from c4.py used repeated layer TransformerLmSpmdAdam")
       stacked_p = stacked_p.block
     transformer_layer_p = stacked_p.transformer_layer_params_tpl
     transformer_layer_p.tr_atten_tpl.use_bias = self.USE_BIAS
@@ -426,11 +427,12 @@ class TransformerLmSpmdPipelineAdam(
     task_p = super().task()
     model_p = task_p.model
     model_p.lm_tpl.packed_input = self.PACKED_INPUT  # pytype: disable=attribute-error  # enable-nested-classes
-
+    print("log from c4.py")
     stacked_p = model_p.lm_tpl.stacked_transformer_tpl  # pytype: disable=attribute-error  # enable-nested-classes
     if fdl.get_callable(stacked_p) == transformers.PipelinedTransformer:
       stacked_p = stacked_p.pipeline_stage
     if self.USE_REPEATED_LAYER:
+      print("log from c4.py used repeated layer TransformerLmSpmdPipelineAdam")
       stacked_p = stacked_p.block
     transformer_layer_p = stacked_p.transformer_layer_params_tpl
     transformer_layer_p.tr_atten_tpl.use_bias = self.USE_BIAS
