@@ -570,6 +570,7 @@ class TransformerLmSpmdAdafactor(base_experiment.BaseExperiment):
 
   def task(self) -> pax_fiddle.Config[tasks_lib.SingleTask]:
     """Returns the task parameters."""
+    print("logging from model_params.py")
     if self.DIMS_PER_HEAD is not None:
       if self.NUM_HEADS is None:
         assert self.MODEL_DIMS % self.DIMS_PER_HEAD == 0
@@ -750,6 +751,7 @@ class TransformerLmSpmdPipelineAdafactor(TransformerLmSpmdAdafactor):
 
   def task(self) -> pax_fiddle.Config[tasks_lib.SingleTask]:
     """Returns the task parameters."""
+    print("logging from model_params.py")
     if self.DIMS_PER_HEAD is not None:
       if self.NUM_HEADS is None:
         assert self.MODEL_DIMS % self.DIMS_PER_HEAD == 0
