@@ -20,6 +20,7 @@ import typing
 from typing import Optional, Sequence, Type, cast
 
 import fiddle as fdl
+import logging
 from jax import numpy as jnp
 from paxml import base_experiment
 from paxml import tasks_lib
